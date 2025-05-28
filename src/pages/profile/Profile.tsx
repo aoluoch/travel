@@ -21,7 +21,7 @@ const Profile = () => {
     setIsLoading(true);
     try {
       // Save profile changes
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to save profile:", error);
@@ -80,8 +80,8 @@ const Profile = () => {
                 >
                   Cancel
                 </Button>
-                <Button 
-                  onClick={handleSave} 
+                <Button
+                  onClick={handleSave}
                   disabled={isLoading}
                   className="w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -179,7 +179,8 @@ const Profile = () => {
                 </div>
 
                 <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 leading-relaxed">
-                  {user?.bio || "No bio available. Edit your profile to add a bio!"}
+                  {user?.bio ||
+                    "No bio available. Edit your profile to add a bio!"}
                 </p>
 
                 <div className="mt-4 sm:mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -253,7 +254,7 @@ const Profile = () => {
           <Button
             variant="primary"
             className="w-full sm:w-auto"
-            onClick={() => window.location.href = '/trips/create'}
+            onClick={() => (window.location.href = "/trips/create")}
           >
             Plan Your First Trip
           </Button>
