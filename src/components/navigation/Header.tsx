@@ -9,11 +9,7 @@ import {
   User,
   ChevronDown,
 } from "lucide-react";
-import {
-  useAppDispatch,
-  useAuth,
-  useNotifications,
-} from "../../hooks";
+import { useAppDispatch, useAuth, useNotifications } from "../../hooks";
 import {
   toggleMobileMenu,
   toggleNotifications,
@@ -77,26 +73,26 @@ const Header: React.FC = () => {
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex">
             <Link to="/" className="flex items-center space-x-2">
-              <Compass className="h-8 w-8 text-primary-500" />
-              <span className="text-xl font-bold text-gray-900">
+              <Compass className="h-6 w-6 sm:h-8 sm:w-8 text-primary-500" />
+              <span className="text-lg sm:text-xl font-bold text-gray-900">
                 Travel Buddy
               </span>
             </Link>
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden">
+          <div className="flex lg:hidden">
             {isAuthenticated && (
               <button
                 onClick={handleToggleMenu}
-                className="ml-1 flex h-10 w-10 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-600"
+                className="ml-1 flex h-10 w-10 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               >
-                <Menu className="h-6 w-6" />
+                <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
               </button>
             )}
           </div>
@@ -127,7 +123,7 @@ const Header: React.FC = () => {
           {/* Nav items */}
           <div className="hidden md:flex md:items-center">
             {isAuthenticated ? (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 lg:space-x-4">
                 {/* Notifications */}
                 <button
                   onClick={handleToggleNotifications}

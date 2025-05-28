@@ -73,10 +73,10 @@ const Landing = () => {
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-sm border-b border-gray-200 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-14 sm:h-16">
             <div className="flex items-center space-x-2">
-              <Compass className="h-8 w-8 text-primary-500" />
-              <span className="text-xl font-bold text-gray-900">
+              <Compass className="h-6 w-6 sm:h-8 sm:w-8 text-primary-500" />
+              <span className="text-lg sm:text-xl font-bold text-gray-900">
                 Travel Buddy
               </span>
             </div>
@@ -106,7 +106,16 @@ const Landing = () => {
               >
                 Sign In
               </Link>
-              <Button onClick={() => navigate("/register")}>Get Started</Button>
+              <Button onClick={() => navigate("/register")} size="sm">
+                Get Started
+              </Button>
+            </div>
+
+            {/* Mobile menu button - simplified for now */}
+            <div className="md:hidden">
+              <Button onClick={() => navigate("/register")} size="sm">
+                Get Started
+              </Button>
             </div>
           </div>
         </div>

@@ -1,13 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { MapPin, Calendar, Users } from 'lucide-react';
-import { Trip, User } from '../../types';
-import { useDateFormat } from '../../hooks';
-import { truncateText } from '../../utils';
-import Card, { CardContent } from '../ui/Card';
-import Avatar from '../ui/Avatar';
-import Button from '../ui/Button';
-import Badge from '../ui/Badge';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { MapPin, Calendar, Users } from "lucide-react";
+import { Trip, User } from "../../types";
+import { useDateFormat } from "../../hooks";
+import { truncateText } from "../../utils";
+import Card, { CardContent } from "../ui/Card";
+import Avatar from "../ui/Avatar";
+import Button from "../ui/Button";
+import Badge from "../ui/Badge";
 
 interface TripCardProps {
   trip: Trip;
@@ -24,29 +24,31 @@ const TripCard: React.FC<TripCardProps> = ({
 }) => {
   const navigate = useNavigate();
   const { formatDateRange } = useDateFormat();
-  
+
   const handleViewTrip = () => {
     navigate(`/trips/${trip.id}`);
   };
-  
+
   const getStatusBadge = () => {
     switch (trip.status) {
-      case 'planning':
+      case "planning":
         return <Badge variant="primary">Planning</Badge>;
-      case 'active':
+      case "active":
         return <Badge variant="success">Active</Badge>;
-      case 'completed':
+      case "completed":
         return <Badge variant="secondary">Completed</Badge>;
-      case 'cancelled':
+      case "cancelled":
         return <Badge variant="error">Cancelled</Badge>;
       default:
         return null;
     }
   };
-  
+
   return (
     <Card
-      className={`h-full transition-transform hover:translate-y-[-4px] ${compact ? '' : 'overflow-hidden'}`}
+      className={`h-full transition-transform hover:translate-y-[-4px] ${
+        compact ? "" : "overflow-hidden"
+      }`}
       hoverable
     >
       {!compact && (
@@ -56,44 +58,48 @@ const TripCard: React.FC<TripCardProps> = ({
             alt={trip.title}
             className="h-full w-full object-cover"
           />
-          <div className="absolute top-2 right-2">
-            {getStatusBadge()}
-          </div>
+          <div className="absolute top-2 right-2">{getStatusBadge()}</div>
         </div>
       )}
-      
-      <CardContent className={compact ? 'p-3' : 'p-4'}>
+
+      <CardContent className={compact ? "p-3 sm:p-4" : "p-4 sm:p-6"}>
         <div className="flex justify-between items-start">
-          <h3 className={`font-semibold text-gray-900 ${compact ? 'text-base' : 'text-lg'}`}>
+          <h3
+            className={`font-semibold text-gray-900 ${
+              compact ? "text-sm sm:text-base" : "text-base sm:text-lg"
+            } line-clamp-2`}
+          >
             {trip.title}
           </h3>
-          
+
           {compact && (
-            <div className="ml-2">{getStatusBadge()}</div>
+            <div className="ml-2 flex-shrink-0">{getStatusBadge()}</div>
           )}
         </div>
-        
-        <div className="mt-2 space-y-2">
+
+        <div className="mt-2 space-y-1.5 sm:space-y-2">
           <div className="flex items-center text-gray-600">
-            <MapPin className="h-4 w-4 mr-1 text-primary-500" />
-            <span className="text-sm">{trip.destination}</span>
+            <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-primary-500 flex-shrink-0" />
+            <span className="text-xs sm:text-sm truncate">
+              {trip.destination}
+            </span>
           </div>
-          
+
           <div className="flex items-center text-gray-600">
-            <Calendar className="h-4 w-4 mr-1 text-primary-500" />
-            <span className="text-sm">
+            <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-primary-500 flex-shrink-0" />
+            <span className="text-xs sm:text-sm">
               {formatDateRange(trip.startDate, trip.endDate)}
             </span>
           </div>
-          
+
           <div className="flex items-center justify-between">
             <div className="flex items-center text-gray-600">
-              <Users className="h-4 w-4 mr-1 text-primary-500" />
-              <span className="text-sm">
+              <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-primary-500 flex-shrink-0" />
+              <span className="text-xs sm:text-sm">
                 {trip.participants.length}/{trip.maxParticipants} travelers
               </span>
             </div>
-            
+
             {creator && (
               <div className="flex items-center">
                 <Avatar
@@ -108,17 +114,17 @@ const TripCard: React.FC<TripCardProps> = ({
             )}
           </div>
         </div>
-        
+
         {!compact && (
           <>
             <p className="mt-3 text-sm text-gray-600">
               {truncateText(trip.description, 100)}
             </p>
-            
+
             {participants.length > 0 && (
               <div className="mt-4">
                 <div className="flex -space-x-2">
-                  {participants.slice(0, 3).map(participant => (
+                  {participants.slice(0, 3).map((participant) => (
                     <Avatar
                       key={participant.id}
                       src={participant.profileImage}
@@ -127,7 +133,7 @@ const TripCard: React.FC<TripCardProps> = ({
                       className="border-2 border-white"
                     />
                   ))}
-                  
+
                   {participants.length > 3 && (
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-800 border-2 border-white">
                       +{participants.length - 3}
@@ -136,7 +142,7 @@ const TripCard: React.FC<TripCardProps> = ({
                 </div>
               </div>
             )}
-            
+
             <div className="mt-4">
               <Button
                 variant="primary"

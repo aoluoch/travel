@@ -34,7 +34,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
 
   return (
     <Card hoverable className="h-full">
-      <div className="relative h-48 w-full overflow-hidden">
+      <div className="relative h-40 sm:h-48 w-full overflow-hidden">
         <img
           src={user.profileImage}
           alt={`${user.firstName} ${user.lastName}`}
@@ -49,6 +49,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
                 ? "warning"
                 : "error"
             }
+            className="text-xs sm:text-sm"
           >
             {match.status === "accepted"
               ? "Matched"
@@ -59,39 +60,44 @@ const MatchCard: React.FC<MatchCardProps> = ({
         </div>
       </div>
 
-      <CardContent className="p-4">
-        <div className="flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">
+      <CardContent className="p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">
             {user.firstName} {user.lastName}
           </h3>
 
-          <Badge variant="primary">{match.compatibilityScore}% Match</Badge>
+          <Badge variant="primary" className="text-xs sm:text-sm flex-shrink-0">
+            {match.compatibilityScore}% Match
+          </Badge>
         </div>
 
         <div className="mt-2 flex items-center text-gray-600">
-          <MapPin className="h-4 w-4 mr-1 text-primary-500" />
-          <span className="text-sm">{user.country}</span>
+          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-primary-500 flex-shrink-0" />
+          <span className="text-xs sm:text-sm truncate">{user.country}</span>
         </div>
 
         <div className="mt-3">
           <div className="flex flex-wrap gap-1">
             {(user.interests || []).slice(0, 3).map((interest, index) => (
-              <Badge key={index} variant="outline" size="sm">
+              <Badge
+                key={index}
+                variant="outline"
+                size="sm"
+                className="text-xs"
+              >
                 {interest}
               </Badge>
             ))}
             {(user.interests || []).length > 3 && (
-              <Badge variant="outline" size="sm">
+              <Badge variant="outline" size="sm" className="text-xs">
                 +{(user.interests || []).length - 3}
               </Badge>
             )}
           </div>
         </div>
 
-        <p className="mt-3 text-sm text-gray-600">
-          {user.bio.length > 100
-            ? `${user.bio.substring(0, 100)}...`
-            : user.bio}
+        <p className="mt-3 text-xs sm:text-sm text-gray-600 line-clamp-2">
+          {user.bio.length > 80 ? `${user.bio.substring(0, 80)}...` : user.bio}
         </p>
 
         <div className="mt-4 space-y-2">
@@ -100,6 +106,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
             size="sm"
             onClick={handleViewProfile}
             fullWidth
+            className="text-xs sm:text-sm"
           >
             View Profile
           </Button>
@@ -110,20 +117,22 @@ const MatchCard: React.FC<MatchCardProps> = ({
                 variant="danger"
                 size="sm"
                 onClick={handleReject}
-                leftIcon={<X className="h-4 w-4" />}
-                className="flex-1"
+                leftIcon={<X className="h-3 w-3 sm:h-4 sm:w-4" />}
+                className="flex-1 text-xs sm:text-sm"
               >
-                Decline
+                <span className="hidden sm:inline">Decline</span>
+                <span className="sm:hidden">No</span>
               </Button>
 
               <Button
                 variant="success"
                 size="sm"
                 onClick={handleAccept}
-                leftIcon={<Heart className="h-4 w-4" />}
-                className="flex-1"
+                leftIcon={<Heart className="h-3 w-3 sm:h-4 sm:w-4" />}
+                className="flex-1 text-xs sm:text-sm"
               >
-                Accept
+                <span className="hidden sm:inline">Accept</span>
+                <span className="sm:hidden">Yes</span>
               </Button>
             </div>
           )}

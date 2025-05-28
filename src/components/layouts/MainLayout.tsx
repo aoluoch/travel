@@ -57,19 +57,19 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <Header />
 
       <div className="flex flex-1 relative">
-        {/* Fixed Sidebar - Higher z-index to keep it prominent */}
-        <div className="hidden md:block md:fixed md:inset-y-0 md:top-16 md:z-40 md:h-[calc(100vh-4rem)] md:overflow-y-auto">
+        {/* Fixed Sidebar - Responsive positioning */}
+        <div className="hidden lg:block lg:fixed lg:inset-y-0 lg:top-16 lg:z-40 lg:h-[calc(100vh-4rem)] lg:overflow-y-auto">
           <Sidebar />
         </div>
 
-        {/* Main content with proper spacing for footer */}
-        <main className="flex-1 md:ml-64 px-4 py-6 md:px-6 pb-20 md:pb-6">
+        {/* Main content with responsive spacing */}
+        <main className="flex-1 lg:ml-64 px-3 sm:px-4 md:px-6 py-4 sm:py-6 pb-16 sm:pb-20 lg:pb-6">
           {children || <Outlet />}
         </main>
       </div>
 
-      {/* Footer with proper positioning to be visible */}
-      <div className="md:ml-64">
+      {/* Footer with responsive positioning */}
+      <div className="lg:ml-64">
         <Footer />
       </div>
 

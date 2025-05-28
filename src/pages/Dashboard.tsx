@@ -37,24 +37,30 @@ const Dashboard = () => {
     .slice(0, 3);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Welcome Section */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
           Welcome back, {user?.firstName}! 👋
         </h1>
-        <p className="mt-2 text-gray-600">Ready to plan your next adventure?</p>
-        <div className="mt-4 flex space-x-4">
+        <p className="mt-2 text-sm sm:text-base text-gray-600">
+          Ready to plan your next adventure?
+        </p>
+        <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:gap-4">
           <Button
             onClick={() => navigate("/trips/create")}
-            leftIcon={<Plus className="w-5 h-5" />}
+            leftIcon={<Plus className="w-4 h-4 sm:w-5 sm:h-5" />}
+            size="sm"
+            className="sm:size-default"
           >
             Create New Trip
           </Button>
           <Button
             variant="outline"
             onClick={() => navigate("/explore")}
-            leftIcon={<MapPin className="w-5 h-5" />}
+            leftIcon={<MapPin className="w-4 h-4 sm:w-5 sm:h-5" />}
+            size="sm"
+            className="sm:size-default"
           >
             Explore Destinations
           </Button>
@@ -81,7 +87,7 @@ const Dashboard = () => {
               No upcoming trips. Time to plan one!
             </p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
               {upcomingTrips.map((trip) => (
                 <TripCard key={trip.id} trip={trip} compact />
               ))}
@@ -110,7 +116,7 @@ const Dashboard = () => {
               No new matches yet. Keep exploring!
             </p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
               {recentMatches.map((match) => {
                 const otherUserId =
                   match.userId === user?.id

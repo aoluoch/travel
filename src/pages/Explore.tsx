@@ -36,49 +36,58 @@ const Explore = () => {
   const groupTrips = trips.filter((trip) => trip.isGroupTrip);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+      <div className="text-center px-4 sm:px-0">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
           Explore Amazing Destinations
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
           Discover highlighted trips, join group expeditions, and find your next
           adventure from travelers around the world.
         </p>
       </div>
 
       {/* Search and Filters */}
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-4">
         <div className="flex-1">
           <Input
             placeholder="Search destinations, trips, activities..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            icon={<Search className="w-5 h-5 text-gray-400" />}
+            icon={<Search className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />}
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <Button
             variant={filterType === "all" ? "primary" : "outline"}
             onClick={() => setFilterType("all")}
-            leftIcon={<Globe className="w-4 h-4" />}
+            leftIcon={<Globe className="w-3 h-3 sm:w-4 sm:h-4" />}
+            size="sm"
+            className="sm:size-default"
           >
-            All Trips
+            <span className="hidden sm:inline">All Trips</span>
+            <span className="sm:hidden">All</span>
           </Button>
           <Button
             variant={filterType === "highlighted" ? "primary" : "outline"}
             onClick={() => setFilterType("highlighted")}
-            leftIcon={<Star className="w-4 h-4" />}
+            leftIcon={<Star className="w-3 h-3 sm:w-4 sm:h-4" />}
+            size="sm"
+            className="sm:size-default"
           >
-            Featured
+            <span className="hidden sm:inline">Featured</span>
+            <span className="sm:hidden">★</span>
           </Button>
           <Button
             variant={filterType === "group" ? "primary" : "outline"}
             onClick={() => setFilterType("group")}
-            leftIcon={<Users className="w-4 h-4" />}
+            leftIcon={<Users className="w-3 h-3 sm:w-4 sm:h-4" />}
+            size="sm"
+            className="sm:size-default"
           >
-            Group Trips
+            <span className="hidden sm:inline">Group Trips</span>
+            <span className="sm:hidden">Groups</span>
           </Button>
         </div>
       </div>
@@ -86,21 +95,24 @@ const Explore = () => {
       {/* Highlighted Trips Section */}
       {filterType === "all" && highlightedTrips.length > 0 && (
         <section>
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
             <div className="flex items-center space-x-2">
-              <Star className="w-6 h-6 text-yellow-500" />
-              <h2 className="text-2xl font-bold text-gray-900">
+              <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                 Featured Trips
               </h2>
             </div>
             <Button
               variant="outline"
               onClick={() => setFilterType("highlighted")}
+              size="sm"
+              className="sm:size-default"
             >
-              View All
+              <span className="hidden sm:inline">View All</span>
+              <span className="sm:hidden">All</span>
             </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {highlightedTrips.slice(0, 3).map((trip) => (
               <div key={trip.id} className="relative">
                 <TripCard trip={trip} />

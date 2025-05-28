@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, useAuth } from '../../hooks';
 import { fetchTripById, joinTrip, leaveTrip } from '../../store/slices/tripsSlice';
@@ -46,7 +46,7 @@ const TripDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="relative h-64 rounded-lg overflow-hidden">
+      <div className="relative h-48 sm:h-64 lg:h-80 rounded-lg overflow-hidden">
         <img
           src={currentTrip.image}
           alt={currentTrip.title}
@@ -56,32 +56,37 @@ const TripDetails = () => {
           <Button
             variant="primary"
             size="sm"
-            className="absolute top-4 right-4"
+            className="absolute top-3 sm:top-4 right-3 sm:right-4 text-xs sm:text-sm"
             onClick={() => navigate(`/trips/${id}/edit`)}
-            leftIcon={<Edit2 className="w-4 h-4" />}
+            leftIcon={<Edit2 className="w-3 h-3 sm:w-4 sm:h-4" />}
           >
-            Edit Trip
+            <span className="hidden sm:inline">Edit Trip</span>
+            <span className="sm:hidden">Edit</span>
           </Button>
         )}
       </div>
 
-      <div className="mt-6">
-        <h1 className="text-3xl font-bold text-gray-900">{currentTrip.title}</h1>
-        
-        <div className="mt-4 space-y-3">
+      <div className="mt-4 sm:mt-6 px-4 sm:px-0">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+          {currentTrip.title}
+        </h1>
+
+        <div className="mt-3 sm:mt-4 space-y-2 sm:space-y-3">
           <div className="flex items-center text-gray-600">
             <MapPin className="w-5 h-5 mr-2 text-primary-500" />
             <span>{currentTrip.destination}</span>
           </div>
-          
+
           <div className="flex items-center text-gray-600">
             <Calendar className="w-5 h-5 mr-2 text-primary-500" />
             <span>{formatDateRange(currentTrip.startDate, currentTrip.endDate)}</span>
           </div>
-          
+
           <div className="flex items-center text-gray-600">
             <Users className="w-5 h-5 mr-2 text-primary-500" />
-            <span>{currentTrip.participants.length}/{currentTrip.maxParticipants} travelers</span>
+            <span>
+              {currentTrip.participants.length}/{currentTrip.maxParticipants} travelers
+            </span>
           </div>
         </div>
 
@@ -117,20 +122,12 @@ const TripDetails = () => {
 
         <div className="mt-8 flex justify-center">
           {!isCreator && !isParticipant && (
-            <Button
-              onClick={handleJoinTrip}
-              disabled={isFull}
-              className="w-full max-w-sm"
-            >
+            <Button onClick={handleJoinTrip} disabled={isFull} className="w-full max-w-sm">
               {isFull ? 'Trip is Full' : 'Join Trip'}
             </Button>
           )}
           {!isCreator && isParticipant && (
-            <Button
-              variant="outline"
-              onClick={handleLeaveTrip}
-              className="w-full max-w-sm"
-            >
+            <Button variant="outline" onClick={handleLeaveTrip} className="w-full max-w-sm">
               Leave Trip
             </Button>
           )}
