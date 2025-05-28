@@ -131,18 +131,24 @@ const Explore = () => {
       {/* Group Trips Section */}
       {filterType === "all" && groupTrips.length > 0 && (
         <section>
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
             <div className="flex items-center space-x-2">
-              <Users className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">
+              <Users className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600" />
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                 Group Expeditions
               </h2>
             </div>
-            <Button variant="outline" onClick={() => setFilterType("group")}>
-              View All
+            <Button
+              variant="outline"
+              onClick={() => setFilterType("group")}
+              size="sm"
+              className="sm:size-default"
+            >
+              <span className="hidden sm:inline">View All</span>
+              <span className="sm:hidden">All</span>
             </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {groupTrips.slice(0, 3).map((trip) => (
               <div key={trip.id} className="relative">
                 <TripCard trip={trip} />
@@ -160,29 +166,29 @@ const Explore = () => {
 
       {/* All Filtered Results */}
       <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
             {filterType === "highlighted" && "Featured Trips"}
             {filterType === "group" && "Group Expeditions"}
             {filterType === "all" && "All Trips"}
           </h2>
-          <span className="text-gray-500">
+          <span className="text-sm sm:text-base text-gray-500">
             {filteredTrips.length} trips found
           </span>
         </div>
 
         {loading ? (
-          <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500" />
+          <div className="flex justify-center py-8 sm:py-12">
+            <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-primary-500" />
           </div>
         ) : filteredTrips.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500">
+          <div className="text-center py-8 sm:py-12 px-4">
+            <p className="text-sm sm:text-base text-gray-500">
               No trips found matching your criteria.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {filteredTrips.map((trip) => (
               <div key={trip.id} className="relative">
                 <TripCard trip={trip} />

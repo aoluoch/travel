@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { MapPin, Star, Users } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
 import { Accommodation } from "../../types";
 import { formatCurrency } from "../../utils";
 import Card, { CardContent } from "../ui/Card";
