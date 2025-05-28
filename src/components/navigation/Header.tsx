@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import {
   useAppDispatch,
-  useAppSelector,
   useAuth,
   useNotifications,
 } from "../../hooks";
